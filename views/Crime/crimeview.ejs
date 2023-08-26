@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_main.png">
+    <title><%= title %></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/stylesheets/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/stylesheets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="/plugins/MaterialDesign/css/materialdesignicons.css" rel="stylesheet">
+    <link href="/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/stylesheets/crime-style.css" id="theme" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" id="theme" rel="stylesheet">
+</head>
+
+<body>
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+    </svg>
+</div>
+<header class="header-area">
+    <div class="left">
+       <a href="/crime" class="logo_midle">
+          <img src="/images/frontend/images/3.jpg" alt="#" />
+
+       </a>
+    </div>
+    <div class="container">
+       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+          <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
+             <div class="navbar-area">
+                <nav class="site-navbar">
+                   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                      <li><a href="/crime">Home</a></li>
+                      <li><a href="/crime#about">About</a></li>
+                      <li><a href="/crime/uploads">Upload Evidence</a></li>
+                      <li><a class="active" href="/crime/news">Crime News</a></li>
+                   </ul>
+                </nav>
+             </div>
+          </div>
+          <div class="col-md-3 text-end">
+            <% if(!data){ %>
+          <a type="button" href="/crime/login" class="btn btn-outline-primary me-2">Login</a>
+          <a type="button" href="/crime/signup" class="btn btn-dark">Sign-up</a>
+          <% } else{ %>
+            <small class="text-white "><%= profile.email %></small>
+            <a href="/crime/signout" class="btn btn-outline-success" type="submit">Logout</a>
+          <% } %>
+        </div>
+       </div>
+    </div>
+ </header>
+
+<div id="main-wrapper">
+    <div class="container-fluid">
+        
+        <div class="row">
+            <!-- Column -->
+            <div class="col-lg-3 col-xlg-3 col-md-4">
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-6 col-xlg-6 col-md-4 m-t-30">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- <ol class="breadcrumb bc-colored m-b-30 bg-info">
+                            <li class="breadcrumb-item">Upload Your Evidance</li>
+                        </ol> -->
+                        <a href="/crime/uploads" class="btn btn-rounded btn-outline-secondary" role="button" > <icon class="fa fa-pencil-square-o"></icon> Upload a Evidance</a>
+                        as a <icon class="mdi mdi-camera-enhance btn btn-rounded btn-outline-secondary">Photos</icon>
+                        or
+                        <icon class="mdi mdi-camcorder btn btn-rounded btn-outline-secondary">Video</icon>
+                    </div>
+                </div>
+                <!-- THIS IS Card will show firebase data as loop wise -->
+                <div id="crime_media">
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-xlg-3 col-md-4">
+
+            </div>
+            <!-- Column -->
+        </div>
+    </div>
+</div>
+ <!--  footer -->
+ <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">© 2023 All Rights Reserved. Design by RAD Team</span>
+    </div>
+  </footer>
+ <!-- end footer -->
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/plugins/bootstrap/js/popper.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/javascripts/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/javascripts/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/javascripts/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/javascripts/custom.min.js"></script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script src="/plugins/validationengine/languages/jquery.validationEngine-en.js"></script>
+<script src="/plugins/validationengine/jquery.validationEngine.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.js"></script>
+
+<script src="/plugins/toast-master/js/jquery.toast.js"></script>
+
+<script>
+
+    function handleVoting(newsID, status, element) {
+        var isUser = '<%= data %>';
+        console.log(isUser)
+
+        if(isUser == 'true'){
+            var countElement = $(element).find('i');
+            var currentCount = parseInt(countElement.text(), 10);
+            var updatedCount = currentCount + 1;
+          
+            // Update the vote count in the DOM
+            countElement.text(updatedCount);
+            
+            if(status == 'true'){            
+                $.ajax({
+                    url: "/crime/vote",
+                    data: { ID : newsID
+                    },
+                    method: "post",
+                    dataType: "json",
+                    error: function(error){
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Internal Server Error!',
+                            position: 'top-right',
+                            loaderBg:'#effff8',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    },
+                    success: function(r){
+                        console.log(r)
+                        //dt.ajax.reload();
+                    }
+                });
+            }else{
+                $.ajax({
+                    url: "/crime/fakeVote",
+                    data: { ID : newsID
+                    },
+                    method: "post",
+                    dataType: "json",
+                    error: function(error){
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Internal Server Error!',
+                            position: 'top-right',
+                            loaderBg:'#effff8',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    },
+                    success: function(r){
+                        console.log(r)
+                        //dt.ajax.reload();
+                    }
+                });
+            }
+        }else{
+            window.location.href = "/crime/login"
+        }
+
+
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+                url: '/crime/getCrimedetails',
+                method: 'POST',
+                processData: false,
+                enctype: 'multipart/form-data',
+                contentType: false,
+                cache: false,
+                error: function(error){
+                    $("#page_load").hide();
+                },
+                success: function(r){
+                    $("#page_load").hide();
+                    var responseVal = JSON.parse(r);
+                    var container = document.getElementById('crime_media');
+                    responseVal.message.forEach(element => {
+
+                        container.innerHTML +=`
+                            <div class="card-deck m-t-10">
+                                <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">${element.headline}</h4>
+                                    <hr class="my-4 dashed-divider">
+                                    <p class="card-text">${element.description}</p>
+                                    <p class="card-text text-right">
+                                    <small class="text-muted">${element.district_name}, ${element.province_name}</small>
+                                    </p>
+                                    <hr class="my-2 dashed-divider">
+                                    <a onclick="handleVoting(${element.news_id}, 'true', this)" class="m-r-15 text-success" style="cursor: pointer;"><i class="mdi mdi-thumb-up m-r-3">${element.true_count}</i> True</a>
+                                    <a style="border-right: 1px #28282860 solid;" class="m-r-15"></a>
+                                    <a onclick="handleVoting(${element.news_id}, 'fake', this)" class="m-r-15 text-danger" style="cursor: pointer;"><i class="mdi mdi-thumb-down m-r-3">${element.fake_count}</i> Fake</a>
+                                </div>
+                                </div>
+                            </div>
+                            `;
+                    });
+                }
+            });   
+    });
+</script>
+
+</body>
+
+</html>

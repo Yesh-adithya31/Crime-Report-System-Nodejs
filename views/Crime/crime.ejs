@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_main.png">
+    <title><%= title %></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/stylesheets/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/stylesheets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="/plugins/MaterialDesign/css/materialdesignicons.css" rel="stylesheet">
+    <link href="/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/stylesheets/crime-style.css" id="theme" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body class="main_layout">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+    </svg>
+</div>
+
+<!-- top -->
+<!-- header -->
+<header class="header-area">
+    <div class="left">
+       <a href="/crime" class="logo_midle">
+          <img src="/images/frontend/images/3.jpg" alt="#" />
+
+       </a>
+    </div>
+    <div class="container">
+       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+          <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
+             <div class="navbar-area">
+                <nav class="site-navbar">
+                   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                      <li><a class="active" href="#home">Home</a></li>
+                      <li><a href="#about">About</a></li>
+                      <li><a href="/crime/uploads">Upload Evidence</a></li>
+                      <li><a href="/crime/news">Crime News</a></li>
+                   </ul>
+                </nav>
+             </div>
+          </div>
+          <div class="col-md-3 text-end">
+            <% if(!data){ %>
+          <a type="button" href="/crime/login" class="btn btn-outline-primary me-2">Login</a>
+          <a type="button" href="/crime/signup" class="btn btn-dark">Sign-up</a>
+          <% } else{ %>
+            <small class="text-white "><%= profile.email %></small>
+            <a href="/crime/signout" class="btn btn-outline-success" type="submit">Logout</a>
+          <% } %>
+        </div>
+       </div>
+    </div>
+ </header>
+<!-- end header -->
+ <div id="home" class="full_bg">
+    <!-- header inner -->
+    <div class="section">
+       <!-- carousel code -->
+       <div id="banner1" class="carousel slide slider_main">
+          <ol class="carousel-indicators ">
+             <li data-target="#banner1" data-slide-to="0" class="indicator-li-1">01</li>
+             <li data-target="#banner1" data-slide-to="1" class="">02</li>
+             <li data-target="#banner1" data-slide-to="2" class="active">03</li>
+          </ol>
+          <div class="carousel-inner">
+             <!-- first slide -->
+             <div class="carousel-item active">
+                <div class="carousel-caption cuplle">
+                   <div class="container">
+                      <div class="row">
+                         <div class="col-md-8">
+                            <div class="photog">
+                               <h1>Uncovering Truth<br> Solving Crimes</h1>
+                               <a class="read_more" href="/crime/uploads">Upload Evidence</a>
+                               <!-- <a class="read_more" href="about.html">About Us</a> -->
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+       </div>
+    </div>
+ </div>
+ <!-- end banner -->
+ <!-- about -->
+ <div id="about" class="about">
+    <div class="container_width">
+       <div class="row d_flex">
+          <div class="col-md-7">
+             <div class="titlepage text_align_left">
+                <h2>About Us</h2>
+                <p>We provide a secure platform for you to report criminal activity online. This system offers an easy
+                    way for you to enter crime information from anywhere and also enables you to respond to the crime
+                    news displayed here. Your active participation ensures the accuracy of the news. Rest assured, we
+                    protect your identity throughout the reporting process.
+
+                 </p>
+                 <ul>
+                    <li style="list-style: disc;">Report Crime:<br />
+                       - When you report a crime using our platform, it is sent directly to your local police
+                       station.<br />
+                       - This enables them to take prompt action based on the accuracy of your report.
+                    </li>
+                    <li style="list-style: disc;">Reduce Misuse of Emergency Number:<br />
+                       - By using our website for reporting crimes, we aim to reduce the misuse of the police emergency
+                       number.<br />
+                       - This ensures that the emergency line remains efficient for genuine emergencies.
+                    </li>
+                    <li style="list-style: disc;">Enhance Efficiency:<br />
+                       - Our platform streamlines the process of reporting crimes, making it more convenient and
+                       efficient
+                       for users.<br />
+                       - This allows for quicker and more effective responses from law enforcement agencies.
+                    </li>
+                    <li style="list-style: disc;">Commitment to Accuracy:<br />
+                       - We are committed to providing accurate crime news and information.<br />
+                       - By reporting crimes accurately, we contribute to maintaining the reliability of the
+                       information
+                       displayed on our platform.
+                    </li>
+                    <li style="list-style: disc;">Prioritizing Safety:<br />
+                       - Your safety is our top priority.<br />
+                       - We encourage users to refrain from misusing the platform and report crimes responsibly.
+                    </li>
+
+                 </ul>
+                 <p>Our commitment is to provide accurate crime news and prioritize your safety, so please refrain from
+                    misusing this site.
+                 </p>
+                 <a class="read_more" href="/crime/uploads">Upload Evidence</a>
+             </div>
+          </div>
+          <div class="col-md-5">
+             <div class="about_img text_align_center">
+                <figure><img src="images/frontend/images/4.jpg" alt="#" /></figure>
+             </div>
+          </div>
+
+       </div>
+    </div>
+ </div>
+ <!-- end about -->
+ <!-- coronata -->
+ <div class="coronata">
+    <div class="container">
+       <div class="row d_flex grid">
+          <div class="col-md-7">
+             <div class="coronata_img text_align_center">
+                <figure><img src="images/frontend/images/5.jpg" alt="#" /></figure>
+             </div>
+          </div>
+          <div class="col-md-5 oder1">
+             <div class="titlepage text_align_left">
+                <h2>Crime: Seeking Justice and Safety </h2>
+                <p>Crime is an unfortunate reality that affects individuals and communities worldwide. At CrimInv, we
+                   understand the importance of seeking justice and promoting safety. Our platform is dedicated to
+                   providing resources, tools, and support for crime investigation, prevention, and awareness.
+                   Together, we can combat crime, protect the innocent, and foster a more secure society. Join us in
+                   our mission to make a difference.
+                </p>
+                <a class="read_more" href="#">About More</a>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- end coronata -->
+ <!-- cases -->
+ <div class="cases">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="titlepage text_align_center ">
+                <h2>Protecting Against Crimes</h2>
+                <p>At Crime Investigation, we believe in proactive measures to protect against crimes, emphasizing awareness,
+                    collaboration with law enforcement, and active community engagement.</p>
+             </div>
+          </div>
+       </div>
+       <div class="row d_flex">
+          <div class=" col-md-4">
+             <div class="latest text_align_center">
+                <figure><img src="images/frontend/images/safety.png" width="150" height="150" alt="#" /></figure>
+                <div class="nostrud">
+                   <h3> Awareness & Prevention</h3>
+                   <p> Increase your personal safety and reduce vulnerability by educating yourself about
+                    common criminal tactics, staying informed about crime trends, and implementing
+                    effective preventive measures.</p>
+                </div>
+             </div>
+          </div>
+          <div class=" col-md-4">
+             <div class="latest text_align_center">
+                <figure><img src="images/frontend/images/law.png" width="150" height="150" alt="#" /></figure>
+                <div class="nostrud">
+                   <h3>Law Enforcement Collaboration</h3>
+                   <p>Forge a strong partnership with law enforcement agencies by reporting suspicious
+                    activities, providing vital information, and cooperating in investigations to ensure a
+                    swift and effective response to criminal incidents.</p>
+                </div>
+             </div>
+          </div>
+          <div class=" col-md-4">
+             <div class="latest text_align_center">
+                <img src="images/frontend/images/community.png" width="150" height="150" alt="#" />
+                <div class="nostrud">
+                   <h3>Community Engagement</h3>
+                   <p>Strengthen the fabric of our communities by fostering a sense of unity, organizing
+                    crime prevention events, and promoting dialogue
+                    among residents to collectively address safety concerns.</p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- end cases -->
+
+ <!--  footer -->
+ <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">© 2023 All Rights Reserved. Design by RAD Team</span>
+    </div>
+  </footer>
+ <!-- end footer -->
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/plugins/bootstrap/js/popper.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/javascripts/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/javascripts/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/javascripts/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/javascripts/custom.min.js"></script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script src="/plugins/validationengine/languages/jquery.validationEngine-en.js"></script>
+<script src="/plugins/validationengine/jquery.validationEngine.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.js"></script>
+
+<script src="/plugins/toast-master/js/jquery.toast.js"></script>
+
+</body>
+
+</html>

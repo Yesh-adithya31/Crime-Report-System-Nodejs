@@ -1,0 +1,117 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Manage Public Crime News</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="mdi mdi-chevron-right"><a href="javascript:void(0)">Public Crime News</a></li>
+            <li class="mdi mdi-chevron-right active">Manage Public Crime News</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">Public Crime News details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive m-t-40">
+                        <table id="myTable" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+</div>
+
+<script>
+
+    $(document).ready(function() {
+        dt = $('#myTable').DataTable({
+            "dom": '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+            "buttons": {
+                "buttons": [
+                    { extend: 'copy', className: 'btn' },
+                    { extend: 'csv', className: 'btn' },
+                    { extend: 'excel', className: 'btn' },
+                    { extend: 'pdf', className: 'btn' },
+                    { extend: 'print', className: 'btn' }
+                ]
+            },
+            "bAutoWidth": false,
+            "bDestroy": true,
+            "order": [
+                [0, "asc"]
+            ],
+            "processing": true,
+            "serverside": true,
+            "initComplete": function (setting, json) {
+                $('#myTable').show();
+            },
+            "select": true,
+            "bFilter": true,
+            "bInfo": true,
+            "bPaginate": true,
+            "columns": [
+                {
+                    "data": "news_id",
+                    "title": "News ID",
+                },
+                {
+                    "data": "headline",
+                    "title": "News Headline"
+                },
+                {
+                    "data": "description",
+                    "title": "News Description"
+                },
+                {
+                    "title": "Fake/True"
+                }
+            ],
+            "columnDefs": [
+            {
+                    "targets": [3],
+                    "orderable": false,
+                    "render": function (data, type, row, meta) {
+                        if (row.fake_count <= row.true_count) {
+                            return '<span class="label label-info">True</span>'
+                        }
+                        else {
+                            return '<span class="label label-danger">Fake</span>'
+                        }
+                    }
+                }
+            ],
+            "language": {
+                "emptyTable": "No files to show..."
+            },
+            "ajax":
+            {
+                "type": "post",
+                "url": '/getCrimedetails',
+                "contentType": 'application/json; charset=utf-8',
+                "datatype": 'json',
+                "dataSrc": ""
+            }
+        });
+    });
+
+
+</script>
+

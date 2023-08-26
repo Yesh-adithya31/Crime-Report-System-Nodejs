@@ -1,0 +1,189 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Manage Crimes</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="mdi mdi-chevron-right"><a href="javascript:void(0)">Crimes</a></li>
+            <li class="mdi mdi-chevron-right active">Manage Crimes</li>
+        </ol>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">Crime details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive m-t-40">
+                        <table id="myTable" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+</div>
+
+<script>
+
+    function delete_account(data){
+        $("#page_load").show();
+        swal({
+            title: "Do you want to remove this crime details?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#fcb03b",
+            confirmButtonText: "Yes, remove it!",
+            cancelButtonText: "No, cancel it!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm){
+            if (isConfirm)
+            {
+                $.ajax({
+                    url: "/deleteCrime",
+                    data: {
+                        ID : data,
+                    },
+                    method: "post",
+                    dataType: "json",
+                    error: function(error){
+                        $("#page_load").hide();
+                        swal("Failed", "The operation which you perform is failed!", "error");
+                        dt.ajax.reload();
+                        dt.draw();
+                    },
+                    success: function(r){
+                        $("#page_load").hide();
+                        if(r.status === 200){
+                            swal("Removed!", r.message, "success");
+                        }
+
+                        if(r.status == 500){
+                            swal("Failed", r.message, "error");
+                        }
+                        dt.ajax.reload();
+                        dt.draw();
+                    }
+                });
+            }
+            else {
+                swal("Cancelled", "The operation cancelled by the user", "error");
+                $("#page_load").hide();
+            }
+        });
+   }
+
+    $(document).ready(function() {
+        dt = $('#myTable').DataTable({
+            "dom": '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+            "buttons": {
+                "buttons": [
+                    { extend: 'copy', className: 'btn' },
+                    { extend: 'csv', className: 'btn' },
+                    { extend: 'excel', className: 'btn' },
+                    { extend: 'pdf', className: 'btn' },
+                    { extend: 'print', className: 'btn' }
+                ]
+            },
+            "bAutoWidth": false,
+            "bDestroy": true,
+            "order": [
+                [0, "asc"]
+            ],
+            "processing": true,
+            "serverside": true,
+            "initComplete": function (setting, json) {
+                $('#myTable').show();
+            },
+            "select": true,
+            "bFilter": true,
+            "bInfo": true,
+            "bPaginate": true,
+            "columns": [
+                {
+                    "data": "crime_id",
+                    "title": "Crime ID",
+                },
+                {
+                    "data": "file_name",
+                    "title": "Media",
+                    mRender: function (data) {
+                        var res = data.split(".mp4");
+                        if(res[1] === ''){
+                            return '<a href="/images/crime/'+data+'"> <video width="150" height="150" controls><source src="/images/crime/'+data+'" type="video/mp4">Your browser does not support the video tag.</video></a>'
+                        }else{
+                            return '<a href="/images/crime/'+data+'"> <img src="/images/crime/'+data+'" alt="user" width="150" class="" /></a>'
+                        }
+                    }
+                },
+                {
+                    "title": "Uploader Details"
+                },
+                {
+                    "data": "crime_type",
+                    "title": "Crime Category"
+                },
+                {
+                    "data": "station_name",
+                    "title": "Nearest Station"
+                },
+                {
+                    "data": "headline",
+                    "title": "News Headline"
+                },
+                {
+                    "data": "description",
+                    "title": "News Description"
+                },
+                {
+                    "title": "Action"
+                }
+            ],
+            "columnDefs": [
+            {
+                    "targets": [2],
+                    "orderable": false,
+                    "render": function (data, type, row, meta) {
+                        return '<p> Name: '+ row.first_name +' '+ row.last_name+'</p> <p> NIC: '+ row.nic +'</p>';
+                    }
+                },
+                {
+                    "targets": [7],
+                    "orderable": false,
+                    "render": function (data, type, row, meta) {
+                        return '<div class="btn-group btn-group-xs col-md-2 "><button id="btn-row-delete" onclick="delete_account(\'' + row.crime_id + '\');" class="btn btn-danger"><i class="mdi mdi-cancel"></i></button></div>';
+                    }
+                },
+            ],
+            "language": {
+                "emptyTable": "No files to show..."
+            },
+            "ajax":
+            {
+                "type": "post",
+                "url": '/getCrimedetails',
+                "contentType": 'application/json; charset=utf-8',
+                "datatype": 'json',
+                "dataSrc": ""
+            }
+        });
+    });
+
+</script>
+

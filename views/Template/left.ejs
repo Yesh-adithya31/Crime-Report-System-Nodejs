@@ -1,0 +1,48 @@
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- User profile -->
+        <div class="user-profile">
+            <!-- User profile image -->
+            <div class="profile-img"> <img src="/images/users/placeholder.png" alt="user" />
+                <!-- this is blinking heartbit-->
+                <div class="notify setpos"> </div>
+            </div>
+            <!-- User profile text-->
+            <div class="profile-text">
+                <h5><%= profile.username%></h5>
+                <h6 class="text-muted"><%= profile.email %></h6>
+            </div>
+        </div>
+        <!-- End User profile text-->
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="nav-devider"></li>
+                <% if(profile.username.toString() === 'POLICE'){ %>
+                        <li> <a class="waves-effect waves-dark" href="/dashboard/police-view" aria-expanded="false"><i
+                            class="mdi  mdi-note-multiple-outline"></i><span class="hide-menu">Crimes</span></a>
+                        </li>
+                <% } else { %>
+                    <li> <a class="waves-effect waves-dark" href="/dashboard" aria-expanded="false"><i
+                                class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+                    </li>
+    
+                    <li> <a class="waves-effect waves-dark" href="/dashboard/userView" aria-expanded="false"><i
+                        class="mdi mdi-account"></i><span class="hide-menu">Users</span></a>
+                    </li>
+    
+                    <li> <a class="waves-effect waves-dark" href="/dashboard/publicCrime" aria-expanded="false"><i
+                        class="mdi  mdi-view-dashboard"></i><span class="hide-menu">Public crimes view</span></a>
+                    </li>
+    
+                    <li> <a class="waves-effect waves-dark" href="/dashboard/crime" aria-expanded="false"><i
+                        class="mdi  mdi-note-multiple-outline"></i><span class="hide-menu">Crimes</span></a>
+                    </li>
+                <% }%>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>

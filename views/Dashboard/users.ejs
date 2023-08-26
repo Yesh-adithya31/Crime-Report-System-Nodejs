@@ -1,0 +1,238 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Manage Users</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="mdi mdi-chevron-right"><a href="javascript:void(0)">Users</a></li>
+            <li class="mdi mdi-chevron-right active">Manage Users</li>
+        </ol>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">User details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive m-t-40">
+                        <table id="myTable" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">Crime uploaded User details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive m-t-40">
+                        <table id="myTable2" class="table table-bordered table-striped">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function delete_account(data){
+        var res = data.split("-");
+        console.log(res)
+        $("#page_load").show();
+        swal({
+            title: "Do you want to remove this account?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#fcb03b",
+            confirmButtonText: "Yes, remove it!",
+            cancelButtonText: "No, cancel it!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm){
+            if (isConfirm)
+            {
+                $.ajax({
+                    url: "/deleteUser",
+                    data: { ID : res[0],
+                            isDeleted: res[1] 
+                    },
+                    method: "delete",
+                    dataType: "json",
+                    error: function(error){
+                        $("#page_load").hide();
+                        swal("Failed", "The operation which you perform is failed!", "error");
+                        dt.ajax.reload();
+                        dt.draw();
+                    },
+                    success: function(r){
+                        $("#page_load").hide();
+                        if(r.status === 200){
+                            swal("Removed!", r.message, "success");
+                        }
+
+                        if(r.status == 500){
+                            swal("Failed", r.message, "error");
+                        }
+                        dt.ajax.reload();
+                        dt.draw();
+                    }
+                });
+            }
+            else {
+                swal("Cancelled", "The operation cancelled by the user", "error");
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        dt = $('#myTable').DataTable({
+            "order": [
+                [0, "asc"]
+            ],
+            "processing": true,
+            "serverside": true,
+            "initComplete": function (setting, json) {
+                $('#myTable').show();
+            },
+            "select": true,
+            "bFilter": true,
+            "bInfo": true,
+            "bPaginate": true,
+            "columns": [
+                {
+                    "data": "user_id",
+                    "name": "user_id",
+                    "title": "User ID",
+                },
+                {
+                    "data": "nic",
+                    "name": "nic",
+                    "title": "User NIC",
+                },
+                {
+                    "data": "first_name",
+                    "name": "first_name",
+                    "title": "First Name"
+                },
+                {
+                    "data": "last_name",
+                    "name": "last_name",
+                    "title": "Last Name"
+                },
+                {
+                    "data": "email",
+                    "name": "email",
+                    "title": "Email"
+                }
+            ],
+            "columnDefs": [
+            ],
+            "language": {
+                "emptyTable": "No files to show..."
+            },
+            "ajax":
+            {
+                "type": "post",
+                "url": '/getAllUsers',
+                "contentType": 'application/json; charset=utf-8',
+                "datatype": 'json',
+                "dataSrc": ""
+            }
+        });
+    
+        dt2 = $('#myTable2').DataTable({
+            "order": [
+                [0, "asc"]
+            ],
+            "processing": true,
+            "serverside": true,
+            "initComplete": function (setting, json) {
+                $('#myTable').show();
+            },
+            "select": true,
+            "bFilter": true,
+            "bInfo": true,
+            "bPaginate": true,
+            "columns": [
+                {
+                    "data": "userID",
+                    "name": "userID",
+                    "title": "User ID",
+                },
+                {
+                    "data": "NIC",
+                    "name": "NIC",
+                    "title": "User NIC",
+                },
+                {
+                    "data": "Fname",
+                    "name": "Fname",
+                    "title": "First Name"
+                },
+                {
+                    "data": "Lname",
+                    "name": "Lname",
+                    "title": "Last Name"
+                },
+                {
+                    "data": "total_crimes",
+                    "name": "total_crimes",
+                    "title": "# of Posted Crime"
+                },
+                {
+                    "title": "Status"
+                },
+                {
+                    "title": "Action"
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [6],
+                    "orderable": false,
+                    "render": function (data, type, row, meta) {
+                        return '<div class="btn-group btn-group-xs col-md-2 "><button id="btn-row-delete" onclick="delete_account(\'' + row.user_id +"-"+ row.isDeleted + '\');" class="btn btn-danger"><i class="mdi mdi-cancel"></i></button></div>';
+                    }
+                },
+                {
+                    "targets": [5],
+                    "orderable": false,
+                    "render": function (data, type, row, meta) {
+                        if (row.total_fake_crimes < row.total_true_crimes) {
+                            return '<span class="label label-info">True</span>'
+                        }
+                        else {
+                            return '<span class="label label-danger">Fake</span>'
+                        }
+                    }
+                }
+            ],
+            "language": {
+                "emptyTable": "No files to show..."
+            },
+            "ajax":
+            {
+                "type": "post",
+                "url": '/getUsers',
+                "contentType": 'application/json; charset=utf-8',
+                "datatype": 'json',
+                "dataSrc": ""
+            }
+        });
+    });
+
+</script>
+
