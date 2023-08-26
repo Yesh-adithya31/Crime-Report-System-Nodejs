@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_main.png">
+    <title><%= title %></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/stylesheets/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/stylesheets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="/plugins/dropify/dist/css/dropify.min.css">
+    <!-- toast CSS -->
+    <link href="/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="/plugins/MaterialDesign/css/materialdesignicons.css" rel="stylesheet">
+    <link href="/stylesheets/crime-style.css" id="theme" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" id="theme" rel="stylesheet">
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+    </svg>
+</div>
+<header class="header-area">
+    <div class="left">
+       <a href="/crime" class="logo_midle">
+          <img src="/images/frontend/images/3.jpg" alt="#" />
+
+       </a>
+    </div>
+    <div class="container">
+       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+          <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
+             <div class="navbar-area">
+                <nav class="site-navbar">
+                   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                      <li><a href="/crime">Home</a></li>
+                      <li><a href="/crime#about">About</a></li>
+                      <li><a class="active" href="#">Upload Evidence</a></li>
+                      <li><a href="/crime/news">Crime News</a></li>
+                   </ul>
+                </nav>
+             </div>
+          </div>
+          <div class="col-md-3 text-end">
+            <% if(data){ %>
+                <small class="text-white pt-2 pr-2"><%= profile.email %></small>
+            <% } %>
+            <a href="/crime/signout" class="btn btn-outline-success" type="submit">Logout</a>
+        </div>
+       </div>
+    </div>
+ </header>
+
+<div id="div_add">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info m-t-30 m-l-30 m-r-30">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white">Upload Crime Details</h4>
+                </div>
+                <div class="card-body row">
+                    <form id="form_insert" name="form_insert" enctype="multipart/form-data" role="form" method="POST" class="form-horizontal col-md-9" style="border-right: 1px #28282885 solid;">
+                        <div class="form-body">
+                            <h3 class="box-title">Details information</h3>
+                            <hr class="m-t-0 m-b-40">
+                            <div class="row p-t-20">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Crime Type</label>
+                                        <!-- <div class="col-md-10"> -->
+                                            <select class="custom-select col-12" id="cmb_crime_type">
+                                                <option selected="">Choose...</option>
+                                                <option value="Antisocial behaviour">Antisocial behaviour</option>
+                                                <option value="Arson">Arson</option>
+                                                <option value="Burglary">Burglary</option>
+                                                <option value="Childhood abuse">Childhood abuse</option>
+                                                <option value="Crime abroad">Crime abroad</option>
+                                                <option value="Cybercrime and online fraud">Cybercrime and online fraud</option>
+                                                <option value="Domestic abuse">Domestic abuse</option>
+                                                <option value="Fraud">Fraud</option>
+                                                <option value="Hate crime">Hate crime</option>
+                                                <option value="Modern slavery">Modern slavery</option>
+                                                <option value="Murder or manslaughter">Murder or manslaughter</option>
+                                                <option value="Rape and sexual assault">Rape and sexual assault</option>
+                                                <option value="Robbery">Robbery</option>
+                                                <option value="Sexual harassment">Sexual harassment</option>
+                                                <option value="Stalking and harassment">Stalking and harassment</option>
+                                                <option value="Terrorism">Terrorism</option>
+                                                <option value="Violent crime">Violent crime</option>
+                                                <option value="Drug Crimes">Drug Crimes</option>
+                                                <option value="Homicide">Homicide</option>
+                                                <option value="Federal Crimes">Federal Crimes</option>
+                                                <option value="Theft Crimes">Theft Crimes</option>
+                                                <option value="Traffic Offenses">Traffic Offenses</option>
+                                            </select>
+                                            <input type="hidden" id="txt_crimetype" name="txt_crimetype" class="form-control">
+                                            <input type="hidden" id="txt_userid" name="txt_userid" value="<%= profile.user_id %>" class="form-control">
+                                        <!-- </div> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">News Headline</label>
+                                        <input type="text" id="txt_headline" name="txt_headline" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row p-t-20">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">News Description</label>
+                                        <input type="text" id="txt_description" name="txt_description" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Province</label>
+                                        <select class="form-control" id="cmb_province" name="cmb_province" tabindex="1"></select>
+                                        <input type="hidden" id="txt_province_name" name="txt_province_name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row p-t-20">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">District</label>
+                                        <select class="form-control" id="cmb_district" name="cmb_district" tabindex="1"></select>
+                                        <input type="hidden" id="txt_district_name" name="txt_district_name" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Near Police Station</label>
+                                        <select class="form-control" id="cmb_police" name="cmb_police" tabindex="1"></select>
+                                        <input type="hidden" id="txt_police_name" name="txt_police_name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row p-t-20">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="input-file-now" class="control-label">Crime Photos/Videos</label>
+                                        <input type="file" id="crime_file" name="crime_file" data-height="200" data-max-file-size="100M"  class="dropify" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn btn-warning">Upload</button>
+                                            <button type="reset" class="btn btn-inverse">Clear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"> </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-horizontal col-md-3">
+                        <div class="form-body">
+                            <h3 class="box-title">Public Crime View Only</h3>
+                            <hr class="m-t-0">
+                            <div id="div_Message" class="row p-2" style="display: block;">
+                                <div class="col-md-12 bg-light py-2">
+                                    <p className="text-center">
+                                        Fill the necessary fields to preview the Publice view of the Crime. News Headline, News Description
+                                        is required
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="div_crimeView"  class="row p-2" style="display: none;">
+                                <div class="card-deck m-t-10 col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title" id="txt_crime_headline"></h4>
+                                            <hr class="my-4 dashed-divider">
+                                            <p class="card-text" id="txt_crime_description"></p>
+                                            <p class="card-text text-right">
+                                                <small class="text-muted" id="txt_location"></small>
+                                            </p>'
+                                            <hr class="my-2 dashed-divider">
+                                            <a href="javascript:;" class="m-r-15 text-success"><i class="mdi mdi-thumb-up m-r-3"></i> True</a>
+                                            <a style="border-right: 1px #28282860 solid;" class="m-r-15"></a>
+                                            <a href="javascript:;" class="m-r-15 text-danger"><i class="mdi mdi-thumb-down m-r-3"></i> Fake</a>
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!--  footer -->
+ <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">© 2023 All Rights Reserved. Design by RAD Team</span>
+    </div>
+  </footer>
+ <!-- end footer -->
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/plugins/bootstrap/js/popper.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/javascripts/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/javascripts/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/javascripts/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/javascripts/custom.min.js"></script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script src="/plugins/validationengine/languages/jquery.validationEngine-en.js"></script>
+<script src="/plugins/validationengine/jquery.validationEngine.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.js"></script>
+<script src="/plugins/dropify/dist/js/dropify.min.js"></script>
+
+<script src="/plugins/toast-master/js/jquery.toast.js"></script>
+<script src="/plugins/sweetalert/sweetalert.min.js"></script>
+<!-- Validation of Login Form & Recovery Email form -->
+<script>
+    $(document).ready(function() {
+        const opLocation =  document.getElementById('txt_location');
+        var UID = $('#txt_userid').val();
+
+        // Basic
+        $('.dropify').dropify({
+            messages: {
+                default: 'Click here to select image.',
+                replace: 'Click here again if you want to change image.',
+                remove: 'Remove',
+                error: 'Ooops, Something went wrong.'
+            }
+        });
+        $(".dropify-clear").trigger("click");
+
+
+        $.ajax({
+            url: '/crime/get-provinces', // Replace with your API endpoint for provinces
+            method: 'GET',
+            success: function(data) {
+              var provinceDropdown = $('#cmb_province');
+              provinceDropdown.empty();
+              provinceDropdown.append($('<option>', {value:'', text:'Select Province'}));
+              $.each(data, function(index, province) {
+                provinceDropdown.append('<option value="' + province.province_id + '">' + province.province_name + '</option>');
+              });
+            }
+          });
+
+        $('#cmb_province').on('change', function() {
+            let selected = this.value;
+            $.ajax({
+                url: '/crime/get-district', // Replace with your API endpoint for districts
+                data: {
+                    provinceID : selected,
+                },
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                  var districtDropdown = $('#cmb_district');
+                  districtDropdown.empty();
+                  districtDropdown.append('<option value="">Select District</option>');
+                  $.each(data, function(index, district) {
+                    districtDropdown.append('<option value="' + district.district_id + '">' + district.district_name + '</option>');
+                  });
+                }
+              });
+
+              $('#txt_province_name').val($('#cmb_province option:selected').val());
+
+        });
+
+        $('#cmb_district').on('change', function() {
+            let selected = this.value;
+            $.ajax({
+                url: '/crime/get-policeStation', // Replace with your API endpoint for districts
+                data: {
+                    districtID : selected,
+                },
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                    var policeStationDropdown = $('#cmb_police');
+                    policeStationDropdown.empty();
+                    policeStationDropdown.append('<option value="">Select Police Station</option>');
+                    $.each(data, function(index, policeStation) {
+                        policeStationDropdown.append('<option value="' + policeStation.station_id + '">' + policeStation.station_name + '</option>');
+                    });
+                }
+              });
+              $('#txt_district_name').val($('#cmb_district option:selected').val());
+              opLocation.textContent = `${$('#cmb_district option:selected').text()+', '+$('#cmb_province option:selected').text()}`;
+        });
+
+        $('#cmb_crime_type').on('change', function() {
+            $('#txt_crimetype').val($('#cmb_crime_type option:selected').val());
+        });
+
+        $('#cmb_police').on('change', function() {
+            $('#txt_police_name').val($('#cmb_police option:selected').val());
+        });
+
+        $("#form_insert").validate({
+            ignore: [],
+            rules: {
+                cmb_crime_type: {
+                    required: true
+                },
+                txt_description: {
+                    required: true
+                },
+                cmb_province: {
+                    required: true
+                },
+                cmb_district: {
+                    required: true
+                },
+                crime_file:{
+                    required: true
+                }
+            },
+            messages: {
+                cmb_crime_type: "Select a crime type.!",
+                txt_description: "Last name required.!",
+                cmb_province: "Select a province.!",
+                cmb_district: "Select a district.!",
+                crime_file: "Crime files required.!",
+
+            },
+            highlight: function(element) {
+                $(element).addClass('error');
+            }, unhighlight: function(element) {
+                $(element).removeClass('error');
+            },
+            submitHandler: function(form){
+
+                $("#page_load").show();
+
+                let formData = new FormData(form);
+
+                $.ajax({
+                    url: '/crime/uploadCrime',
+                    data: formData,
+                    dataType: 'json',
+                    method: 'post',
+                    processData: false,
+                    enctype: 'multipart/form-data',
+                    contentType: false,
+                    cache: false,
+                    error: function(error){
+                        $("#page_load").hide();
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Internal Server Error!',
+                            position: 'top-right',
+                            loaderBg:'#effff8',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    },
+                    success: function(r){
+                        $("#page_load").hide();
+
+                        $("#txt_description").val('');
+                        $(".dropify-clear").trigger("click");
+                        $('#cmb_crime_type').empty();
+                        $('#cmb_province').empty();
+                        $('#cmb_district').empty();
+                        $('#cmb_police').empty();
+
+                        if(r.status === 200){
+                            $.toast({
+                                heading: 'Success',
+                                text: r.message,
+                                position: 'top-right',
+                                loaderBg:'#effff8',
+                                icon: 'info',
+                                hideAfter: 3500
+                            });
+                        }
+
+                        if(r.status == 500){
+                            $.toast({
+                                heading: 'Error',
+                                text: r.message,
+                                position: 'top-right',
+                                loaderBg:'#effff8',
+                                icon: 'error',
+                                hideAfter: 3500
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        const div_crimeView = document.getElementById('div_crimeView');
+        const div_Message= document.getElementById('div_Message');
+
+        const crimeHeadline = document.getElementById('txt_headline');
+        const opHeadline = document.getElementById('txt_crime_headline');
+
+        const crimeDesc = document.getElementById('txt_description');
+        const opDesc = document.getElementById('txt_crime_description');
+
+        crimeHeadline.addEventListener('input', function() {
+            const typedValue = this.value;
+            opHeadline.textContent = `${typedValue}`;
+        });
+        crimeDesc.addEventListener('input', function() {
+          const typedValue = this.value;
+          opDesc.textContent = `${typedValue}`;
+          
+          if (crimeDesc.value !== '') {
+            div_crimeView.style.display = 'block';
+            div_Message.style.display = 'none';
+          }else{
+            div_crimeView.style.display = 'none';
+            div_Message.style.display = 'block';
+          }
+        });
+
+    });
+    </script>
+
+</body>
+
+</html>

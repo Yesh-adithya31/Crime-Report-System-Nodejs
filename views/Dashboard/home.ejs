@@ -1,0 +1,61 @@
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Dashboard</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-white bg-dark mb-3" >
+                <div class="card-header font-bold">Crimes</div>
+                <div class="card-body">
+                    <h5 class="card-title text-white">Total Number of Crimes:</h5>
+                    <span id="t-value" class="t-value font-bold"></span>
+                </div>
+                </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-dark mb-3" >
+                <div class="card-header font-bold">Users</div>
+                <div class="card-body">
+                    <h5 class="card-title text-white">Registered Users:</h5>
+                    <span id="w-value" class="w-value font-bold" ></span>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+                url: '/getUserCount',
+                method: "post",
+                dataType: "json",
+                error: function(error){
+                },
+                success: function(r){
+                    $("#w-value").text(r['COUNT(*)']);
+                }
+            });
+
+            $.ajax({
+                url: '/getCrimeCount',
+                method: "post",
+                dataType: "json",
+                error: function(error){
+                },
+                success: function(r){
+                    $("#t-value").text(r['COUNT(*)']);
+                }
+            });
+});
+
+</script>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_main.png">
+    <title><%= title %></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/stylesheets/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/stylesheets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- toast CSS -->
+<link href="/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+<link href="/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+<link href="/stylesheets/crime-style.css" id="theme" rel="stylesheet">
+<link href="/stylesheets/responsive.css" id="theme" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+    </svg>
+</div>
+<header class="header-area">
+    <div class="left">
+       <a href="/crime" class="logo_midle">
+          <img src="/images/frontend/images/3.jpg" alt="#" />
+
+       </a>
+    </div>
+    <div class="container">
+       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+          <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
+             <div class="navbar-area">
+                <nav class="site-navbar">
+                   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                      <li><a href="/crime">Home</a></li>
+                      <li><a href="/crime#about">About</a></li>
+                      <li><a href="/crime/uploads">Upload Evidence</a></li>
+                      <li><a href="/crime/news">Crime News</a></li>
+                   </ul>
+                </nav>
+             </div>
+          </div>
+          <div class="col-md-3 text-end">
+          <a type="button" href="/crime/login" class="btn btn-outline-primary me-2">Login</a>
+          <a type="button" href="/crime/signup" class="btn btn-dark">Sign-up</a>
+        </div>
+       </div>
+    </div>
+ </header>
+<section id="wrapper">
+    <div class="login-register" style="background-image:url(/images/background/bgReg.jpeg);">
+        <div class="login-box card">
+            <div class="card-body">
+                <form class="form-horizontal form-material" id="form_insert" enctype="multipart/form-data" role="form" method="POST">
+                    <h1 class="box-title m-b-20">CRIME RESEARCH</h1>
+                    <h3 class="box-title m-b-20">Sign Up</h3>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" id="txt_first_name" name="txt_first_name" required placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" id="txt_last_name" name="txt_last_name" required placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" id="txt_nic" name="txt_nic" required="" placeholder="NIC">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" id="txt_email" name="txt_email" required placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" id="txt_password" name="txt_password" required placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" id="txt_confirm_password" name="txt_confirm_password" required placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <div>Already have an account? <a href="/crime/login" class="text-info m-l-5"><b>Sign In</b></a></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/plugins/bootstrap/js/popper.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/javascripts/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/javascripts/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/javascripts/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/javascripts/custom.min.js"></script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+<script src="/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script src="/plugins/toast-master/js/jquery.toast.js"></script>
+<script src="/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script src="/plugins/validationengine/languages/jquery.validationEngine-en.js"></script>
+<script src="/plugins/validationengine/jquery.validationEngine.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.js"></script>
+
+<!-- Validation of Login Form & Recovery Email form -->
+<script>
+     $(document).ready(function() {
+        $("#form_insert").validate({
+            ignore: [],
+            rules: {
+                txt_first_name: {
+                    required: true
+                },
+                txt_last_name: {
+                    required: true
+                },
+                txt_nic:{
+                    required: true,
+                    digits: true,
+                },
+                txt_email: {
+                    required: true,
+                    email: true
+                },
+                txt_password: {
+                    required: true
+                },
+                txt_confirm_password: {
+                    required: true,
+                    equalTo: '#txt_password'
+                }
+            },
+            messages: {
+                txt_first_name: "First name required.!",
+                txt_last_name: "Last name required.!",
+                txt_nic:{
+                    required: "National ID required.!",
+                    digits: "National ID can have digits only.!",
+                },
+                txt_email: {
+                    required: "Email address required.!",
+                    email: "Please check your email address format.!"
+                },
+                txt_password: "Password required.!",
+                txt_confirm_password: {
+                    required: "Confirm password required.!",
+                    equalTo: "Password and confirm password is not matching!."
+                }
+            },
+            highlight: function(element) {
+                $(element).addClass('error');
+            }, unhighlight: function(element) {
+                $(element).removeClass('error');
+            }, submitHandler: function (form) {
+                $("#page_load").show();
+                let formData = new FormData(form);
+                $.ajax({
+                    url: '/crime/createAccount',
+                    data: $('#form_insert').serializeArray(),
+                    dataType: 'json',
+                    method: 'POST',
+                    processData: true,
+                    error: function (error) {
+                        $("#page_load").hide();
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Internal Server Error!',
+                            position: 'top-right',
+                            loaderBg: '#effff8',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    },
+                    success: function (r) {
+                        $("#page_load").hide();
+
+                        $("#txt_first_name").val('');
+                        $("#txt_last_name").val('');
+                        $("#txt_nic").val('');
+                        $("#txt_email").val('');
+                        $("#txt_city").val('');
+                        $("#txt_password").val('');
+                        $("#txt_confirm_password").val('');
+
+                        if (r.status === 200) {
+                            $.toast({
+                                heading: 'Success',
+                                text: r.message,
+                                position: 'top-right',
+                                loaderBg: '#effff8',
+                                icon: 'info',
+                                hideAfter: 3500
+                            });
+                            window.location.href = "/crime/uploads"
+                        }
+                        if (r.status == 500) {
+                            $.toast({
+                                heading: 'Error',
+                                text: r.message,
+                                position: 'top-right',
+                                loaderBg: '#effff8',
+                                icon: 'error',
+                                hideAfter: 3500
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    
+     });
+</script>
+
+</body>
+
+</html>
