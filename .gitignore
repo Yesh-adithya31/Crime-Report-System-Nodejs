@@ -1,5 +1,5 @@
 node_modules
-public/images
+# public/images
 # public/javascripts
 # public/js
 # public/plugins
