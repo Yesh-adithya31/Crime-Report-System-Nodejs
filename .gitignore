@@ -1,6 +1,6 @@
 node_modules
 public/images
-public/javascripts
+# public/javascripts
 # public/js
 # public/plugins
 # public/stylesheets
